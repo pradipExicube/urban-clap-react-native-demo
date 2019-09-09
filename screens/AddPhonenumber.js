@@ -1,7 +1,7 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, {Component} from 'react';
 import {
-  StyleSheet,View,StatusBar,ImageBackground,Image,Dimensions,Text,ActivityIndicator
+  StyleSheet,View,StatusBar,ImageBackground,Image,Dimensions,Text,ActivityIndicator,KeyboardAvoidingView
 } from 'react-native';
 import CustomPhoneNumberInput from '../components/PhoneNumberInput';
 import CustomButton from '../components/CustomButton';
@@ -49,7 +49,7 @@ export default class AddPhonenumberScreen extends Component {
 render(){
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView  style={styles.container} behavior="padding" enabled>
         <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#00BCD4" translucent = {true}/>
         <ImageBackground 
             source={require("../assets/images/phonenumber_background.jpg")} 
@@ -110,7 +110,7 @@ render(){
                 {/* For loading purpose only */}
             </View>
         </ImageBackground>
-    </View>
+    </KeyboardAvoidingView >
   );
 }
 }
