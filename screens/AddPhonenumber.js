@@ -31,7 +31,16 @@ export default class AddPhonenumberScreen extends Component {
     changetext(){
         if(this.state.username){
             if(this.state.username.toString().length == 10){
-                this.setState({showloading:true,textEdit:false},()=>{this.forceUpdate()})
+                this.setState({showloading:true,textEdit:false},()=>{
+
+                    // this.forceUpdate();
+                    setTimeout(() => {
+                        this.setState({showloading:false,textEdit:true},()=>{
+                            this.props.navigation.navigate('Verifyphone')
+                        })
+                    }, 5000);
+
+                })
             }
         }
         

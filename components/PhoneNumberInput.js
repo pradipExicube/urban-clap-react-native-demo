@@ -33,6 +33,7 @@ const CustomPhoneNumberInput = ({value, onChangeText,editable, imagePress,countr
                 onChangeText={onChangeText}
                 value={value}
                 editable={editable}
+                maxLength={10}
             />
         </View>
     </View>
