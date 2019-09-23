@@ -3,32 +3,49 @@ import {
   StyleSheet,View,StatusBar,Dimensions,Text,ActivityIndicator,KeyboardAvoidingView
 } from 'react-native';
 import OTPTextView from 'react-native-otp-textinput';
-
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class VerifyPhonenumberScreen extends Component {
-     
     constructor(props){
         super(props);
         this.state = {
             text2: '',
-            timecount:30
+            timecount:30,
+            showloading:false
           }
     }  
-    
-    componentDidMount(){
+    componentDidMount(){}
 
-    }
     componentWillMount(){
         setInterval(() => {
             if(this.state.timecount >0){
-            // this.value = this.value-1;
             this.setState({timecount : this.state.timecount - 1},()=>{this.forceUpdate()})
             }
         }, 1000);
     }
 
+    gotoLocationScreen(){
+        this.props.navigation.navigate('Location')
+    }
 
+    changeText(value){
+        console.log(value);
+        this.setState({ text2: value },()=>{
+            if(this.state.text2.length == 4){
+                this.setState({showloading:true},()=>{
+                    setTimeout(() => {
+                        this.setState({showloading:false},()=>{
+                            this.gotoLocationScreen();
+                        })
+                    }, 2000);
+                })
+            }
+        })
+    }
 
+    resendFunction(){
+        this.setState({timecount:30})
+    }
 
 render(){
 
@@ -43,7 +60,7 @@ render(){
                     <View style={{top:30}}>
                         <OTPTextView
                             containerStyle={styles.textInputContainer}
-                            handleTextChange={text => this.setState({ text2: text })}
+                            handleTextChange={(text) =>{this.changeText(text)}}
                             textInputStyle={styles.roundedTextInput}
                             inputCount={4}
                             tintColor={'#1A73E8'}
@@ -56,12 +73,27 @@ render(){
                                 {this.state.timecount? this.state.timecount.toString().length >1 ? '00:'+this.state.timecount : '00:0'+this.state.timecount : "00:00"}
                             </Text>
                         :
-                            <Text style={{textAlign:'center', fontSize:12, color:'#6A9955'}}>
-                                Resend
-                            </Text>
+                            <TouchableOpacity onPress={()=>{this.resendFunction()}}>
+                                <Text style={{textAlign:'center', fontSize:12, color:'#6A9955'}}>
+                                    Resend
+                                </Text>
+                            </TouchableOpacity>
+                            
                         }
                         
                     </View>
+
+                {/* For loading purpose only */}
+                {this.state.showloading == true ? 
+                    <View style={styles.loadingView}>
+                        <View style={{flexDirection:'row', justifyContent:"center",width:Dimensions.get('window').width}}>
+                            <ActivityIndicator size="large" color="#0000ff" />
+                        </View>
+                    </View>
+                    
+                :null
+                }
+                {/* For loading purpose only */}
 
             </View>
     </KeyboardAvoidingView>
@@ -97,6 +129,12 @@ const styles = StyleSheet.create({
 
       titleText:{fontSize:16,paddingTop:10,textAlign:"center",fontWeight:"bold",marginTop:30},
       subtitleText:{fontSize:13,paddingTop:10,textAlign:"center"},
-      numberstyle:{fontSize:14,paddingTop:5,textAlign:"center",fontWeight:"bold", letterSpacing:1}
+      numberstyle:{fontSize:14,paddingTop:5,textAlign:"center",fontWeight:"bold", letterSpacing:1},
   
+
+      /* Loading */
+      loadingView: {
+        position:"absolute",
+        top:Dimensions.get('window').height/2
+    },
 });
