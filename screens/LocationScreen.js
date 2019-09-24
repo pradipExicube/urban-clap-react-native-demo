@@ -23,6 +23,10 @@ export default class LocationScreen extends Component {
         }; 
     }
 
+    goToHomeScreen(){
+        this.props.navigation.navigate('Main')
+    }
+
 render(){
 
   return (
@@ -48,6 +52,7 @@ render(){
                             borderColor="#304FFE"
                             TextColor="#FFF"
                             iconSize={24}
+                            onPress={()=>{this.goToHomeScreen()}}
                         >
                             Your current location
                         </CustomButtonIcon>
