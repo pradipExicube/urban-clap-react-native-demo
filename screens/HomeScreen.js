@@ -29,8 +29,45 @@ export default class HomeScreen extends Component {
         require("../assets/images/three.jpg"),
         require("../assets/images/four.jpg"),
       ],
+      serviceItem:[
+        {iconname: require("../assets/images/salon.png"),name:'Salon'},
+        {iconname: require("../assets/images/massage.png"),name:'Massage'},
+        {iconname: require("../assets/images/vacuum.png"),name:'Cleaning'},
+        {iconname: require("../assets/images/reparing.png"),name:'Repairs'},
+        {iconname: require("../assets/images/home_project.png"),name:'Home'},
+        {iconname: require("../assets/images/more.png"),name:'More'},
+      ],
       username:''
     }
+  }
+
+  gotoAllSearch(item){
+    console.log("clicking item : ", item)
+    this.props.navigation.navigate('Allservice')
+  }
+
+  // rgba(70, 113, 130, 1)
+  // AllserviceScreen
+  iconSlider = ({item,index}) => {
+    return(
+      <TouchableOpacity 
+        style={{paddingLeft:10,paddingRight:10,paddingBottom:15,paddingTop:10}}
+        onPress={()=>{this.gotoAllSearch(item)}}
+      >
+        <View>
+            <View style={{flexDirection:"row",justifyContent:"center"}}>
+              <Image
+                style={{width: 25, height: 25}}
+                source={item.iconname} 
+                resizeMode="cover"
+              />
+            </View>
+            <View><Text style={{fontSize:8, letterSpacing:1, textAlign:"center",paddingTop:5,fontWeight:"bold"}}>{item.name}</Text></View>
+        </View>
+        
+
+      </TouchableOpacity>
+    )
   }
 
   fetchSliderItem = ({item,index}) => {
@@ -50,15 +87,20 @@ export default class HomeScreen extends Component {
     return(
       <View style={{flexDirection:"row",margin:5,marginTop:0,marginBottom:0,alignSelf:"center",paddingTop:5,paddingBottom:5,borderBottomWidth:1,borderBottomColor:'#F2F2F2'}}>
         <View style={{flex:3,justifyContent:"center",flexDirection:"column"}}>
-              <View style={{padding:4}}><Text style={{textAlign:'center',fontSize:13,fontWeight:'bold'}}>Cleaning Services</Text></View>
-              <View style={{padding:4}}><Text style={{textAlign:'center',fontSize:10}}>Bathroom | Sofa | Kitchen</Text></View>
+              <View style={{padding:4}}><Text style={{textAlign:'left',fontSize:13,fontWeight:'bold'}}>Cleaning Services</Text></View>
+              <View style={{padding:4}}><Text style={{textAlign:'left',fontSize:9,color:'#24D518',letterSpacing:0.5}}>Bathroom | Sofa | Kitchen</Text></View>
         </View>
         <View style={{flex:1,justifyContent:"center",alignItems:'center',flexDirection:"column"}}>
-              <Ionicons name="md-arrow-dropright" size={20} style={{justifyContent:"center"}} color="#000"/>
+              {/* <Ionicons name="md-arrow-dropright" size={20} style={{justifyContent:"center"}} color="#000"/> */}
+            <Image
+              style={{width: 16, height: 16}}
+              source={require("../assets/images/arrow.png")} 
+              resizeMode="cover"
+            />
         </View>
         <View style={{flex:3}}>
           <Image
-              style={{width: '100%',height:Dimensions.get('window').width/3}}
+              style={{width: '100%',height:Dimensions.get('window').width/4.5}}
               source={item} 
               resizeMode="cover"
             />
@@ -96,7 +138,7 @@ export default class HomeScreen extends Component {
                     </View>
                 </View>
 
-                <View style={styles.slider_main_view}>
+                {/* <View style={styles.slider_main_view}>
                     <FlatList
                       horizontal={true}
                       data={this.state.allData}
@@ -106,10 +148,33 @@ export default class HomeScreen extends Component {
                       keyExtractor={(item, index) => index.toString()}
                       contentContainerStyle={styles.slider_flatlist}
                     />
+                </View> */}
+
+                <View>
+                    <FlatList
+                        horizontal={true}
+                        data={this.state.serviceItem}
+                        renderItem={this.iconSlider}
+                        showsHorizontalScrollIndicator={false}
+                        extraData={this.state}
+                        keyExtractor={(item, index) => index.toString()}
+                        contentContainerStyle={{justifyContent:"space-evenly",flexDirection:"row",width:Dimensions.get('window').width}}
+                    />
                 </View>
 
-                <View style={{flex:3,marginBottom:10}}>
+                <View style={{flex:3}}>
                   <ScrollView>
+                      <View style={styles.slider_main_view}>
+                          <FlatList
+                            horizontal={true}
+                            data={this.state.allData}
+                            renderItem={this.fetchSliderItem}
+                            showsHorizontalScrollIndicator={false}
+                            extraData={this.state}
+                            keyExtractor={(item, index) => index.toString()}
+                            contentContainerStyle={styles.slider_flatlist}
+                          />
+                      </View>
                       <FlatList
                         data={this.state.allData}
                         renderItem={this.fetchList}
@@ -148,7 +213,7 @@ const styles = StyleSheet.create({
   sub_two_input_view:{paddingLeft:10,paddingRight:10},
 
   slider_main_view:{height: ((Dimensions.get('window').width/2.8) + 20)},
-  slider_flatlist:{height: ((Dimensions.get('window').width/2.8) + 20),backgroundColor:'#F2F2F2'}
+  slider_flatlist:{height: ((Dimensions.get('window').width/2.8) + 20),backgroundColor:'#F2F2F2'},
 
 
 

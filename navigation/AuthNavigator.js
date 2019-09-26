@@ -11,3 +11,7 @@ export const AuthStack = createStackNavigator({
 },{
     initialRouteName: 'Location',
 });
+
+// export const Allservice = createStackNavigator({
+//     Allservice: Allservice,
+// });
