@@ -91,7 +91,7 @@ export default class HomeScreen extends Component {
               <View style={{padding:4}}><Text style={{textAlign:'left',fontSize:9,color:'#24D518',letterSpacing:0.5}}>Bathroom | Sofa | Kitchen</Text></View>
         </View>
         <View style={{flex:1,justifyContent:"center",alignItems:'center',flexDirection:"column"}}>
-              {/* <Ionicons name="md-arrow-dropright" size={20} style={{justifyContent:"center"}} color="#000"/> */}
+            {/* <Ionicons name="md-arrow-dropright" size={20} style={{justifyContent:"center"}} color="#000"/> */}
             <Image
               style={{width: 16, height: 16}}
               source={require("../assets/images/arrow.png")} 
