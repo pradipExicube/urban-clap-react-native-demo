@@ -4,10 +4,11 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import MybookingScreen from '../screens/MyBookings';
 import AllserviceScreen from '../screens/AllserviceScreen';
 import SearchserviceScreen from '../screens/SearchService';
+import ProfileScreen from '../screens/ProfileSeceen';
+import HelpcenterScreen from '../screens/HelpcenterScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -58,45 +59,64 @@ const HomeStack = createStackNavigator(
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const MybookingStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Links: MybookingScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+MybookingStack.navigationOptions = {
+  tabBarLabel: 'My Booking',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
+MybookingStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const HelpcenterStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Settings: HelpcenterScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+HelpcenterStack.navigationOptions = {
+  tabBarLabel: 'Help Center',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
 
+HelpcenterStack.path = '';
 
 
 
-SettingsStack.path = '';
+const ProfileStack = createStackNavigator(
+  {
+    Settings: ProfileScreen,
+  },
+  config
+);
+
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-contact' : 'md-contact'} />
+  ),
+};
+
+ProfileStack.path = '';
+
+
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  MybookingStack,
+  HelpcenterStack,
+  ProfileStack
+
 });
 
 tabNavigator.path = '';

@@ -104,7 +104,6 @@ render(){
                             <ActivityIndicator size="large" color="#0000ff" />
                         </View>
                     </View>
-                    
                 :null
                 }
                 {/* For loading purpose only */}
