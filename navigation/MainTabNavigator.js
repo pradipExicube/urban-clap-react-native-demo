@@ -9,6 +9,7 @@ import AllserviceScreen from '../screens/AllserviceScreen';
 import SearchserviceScreen from '../screens/SearchService';
 import ProfileScreen from '../screens/ProfileSeceen';
 import HelpcenterScreen from '../screens/HelpcenterScreen';
+import IndividualServiceScreen from '../screens/IndividualService';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -20,7 +21,8 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Allservice:AllserviceScreen,
-    Searchservice:SearchserviceScreen
+    Searchservice:SearchserviceScreen,
+    Individualservice:IndividualServiceScreen
   },
   config
 );

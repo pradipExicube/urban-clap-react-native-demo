@@ -110,6 +110,10 @@ export default class AllserviceScreen extends Component {
         this.setState({currentindex:0,showingData:this.state.serviceLists[0].data})
     }
 
+    gotoDetails(item){
+        this.props.navigation.navigate('Individualservice')
+    }
+
     /* Service type flatlist item */
     showServiceType = ({item,index}) => {
         return(
@@ -124,7 +128,10 @@ export default class AllserviceScreen extends Component {
 
       fetchList=({item,index})=>{
         return(
-        <View style={{flexDirection:'column',marginLeft:10,marginRight:10,width:'100%',flex:1}}>
+        <TouchableOpacity 
+            style={{flexDirection:'column',marginLeft:10,marginRight:10,width:'100%',flex:1}}
+            onPress={()=>{this.gotoDetails(item)}}
+        >
             <View style={{flexDirection:'row',flex:1,justifyContent:"flex-start"}}>
                 <View style={{flex:1,paddingBottom:5,paddingTop:5}}>
                     <Image
@@ -138,8 +145,7 @@ export default class AllserviceScreen extends Component {
                     <Text style={{fontWeight:'bold',letterSpacing:1.5, fontSize:14}}>{item.name}</Text>
                 </View>
             </View>
-
-        </View>
+        </TouchableOpacity>
         )
       }
 
